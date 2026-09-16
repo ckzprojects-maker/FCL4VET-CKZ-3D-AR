@@ -1,118 +1,109 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>FCL4VET - 3D Printing + AR</title>
-<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-<style>
-html,body{margin:0;overflow:hidden;font-family:Arial,sans-serif}
-#guide{position:fixed;z-index:20;left:50%;top:12px;transform:translateX(-50%);
-background:rgba(25,30,38,.90);color:#fff;padding:10px 18px;border-radius:15px;
-font-weight:700;font-size:14px;box-shadow:0 3px 12px #0006}
-</style>
-<script>
-AFRAME.registerComponent('marker-ui',{
- init:function(){
-  const g=document.getElementById('guide');
-  this.el.addEventListener('markerFound',()=>g.style.display='none');
-  this.el.addEventListener('markerLost',()=>g.style.display='block');
- }
-});
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>FCL4VET – 3D Printing + AR</title>
+
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
+
+  <style>
+    html, body { margin:0; overflow:hidden; font-family:Arial,Helvetica,sans-serif; }
+    .hint {
+      position:fixed; z-index:20; top:14px; left:50%; transform:translateX(-50%);
+      padding:9px 16px; border-radius:18px; color:#fff;
+      background:rgba(0,0,0,.68); font-size:15px; text-align:center;
+      pointer-events:none; white-space:nowrap;
+    }
+  </style>
 </head>
+
 <body>
-<div id="guide">▣ &nbsp; Point the camera at the AR marker</div>
+<div class="hint">FCL4VET • Point the camera at the AR marker</div>
 
-<a-scene embedded vr-mode-ui="enabled:false"
- renderer="logarithmicDepthBuffer:true;precision:medium;antialias:true"
- arjs="trackingMethod:best;sourceType:webcam;debugUIEnabled:false">
+<a-scene
+  embedded
+  vr-mode-ui="enabled: false"
+  renderer="logarithmicDepthBuffer: true; colorManagement: true;"
+  arjs="sourceType: webcam; debugUIEnabled: false;">
 
-<a-assets>
-<a-asset-item id="model" src="assets/asset.glb"></a-asset-item>
-</a-assets>
+  <a-assets>
+    <a-asset-item id="ckzModel" src="assets/asset.glb"></a-asset-item>
+  </a-assets>
 
-<a-marker type="pattern" url="assets/marker.patt" marker-ui>
-<a-entity rotation="-90 0 0">
+  <a-marker type="pattern" url="assets/marker.patt">
 
-<!-- MODEL -->
-<a-entity gltf-model="#model" position="0 0 .18" scale=".72 .72 .72"></a-entity>
+    <!-- Main heading -->
+    <a-plane position="0 1.42 -0.04" width="2.65" height="0.48"
+             rotation="-90 0 0" color="#111111" opacity="0.88">
+      <a-text value="FCL4VET - 3D PRINTING + AR"
+              align="center" color="#FFFFFF" width="2.65"
+              position="0 0.07 0.01"></a-text>
+      <a-text value="DEVELOP"
+              align="center" color="#4DA3FF" width="1.65"
+              position="0 -0.13 0.012"></a-text>
+    </a-plane>
 
-<!-- HEADER -->
-<a-plane position="0 1.30 .02" width="2.82" height=".42"
- material="shader:flat;color:#202630;opacity:.94;transparent:true"></a-plane>
-<a-text value="FCL4VET - 3D PRINTING + AR" position="0 1.35 .10"
- align="center" color="#FFFFFF" width="2.9"></a-text>
-<a-text value="EXPLORE  -  LEARN  -  CREATE" position="0 1.20 .10"
- align="center" color="#DDE7F2" width="1.9"></a-text>
+    <!-- CKZ model -->
+    <a-entity gltf-model="#ckzModel"
+              position="0 0.16 0"
+              rotation="-90 0 0"
+              scale="1.05 1.05 1.05">
+    </a-entity>
 
-<!-- DIGITAL MODEL -->
-<a-plane position="-1.27 .66 .02" width="1.20" height=".60"
- material="shader:flat;color:#FFFFFF;opacity:1;transparent:false;side:double"></a-plane>
-<a-text value="DIGITAL MODEL" position="-1.27 .84 .12" align="center"
- color="#16202A" width="1.48"></a-text>
-<a-text value="From idea to 3D model" position="-1.27 .69 .12" align="center"
- color="#096FD8" width="1.25"></a-text>
-<a-text value="Create the model and prepare it\nfor printing in Bambu Studio."
- position="-1.27 .50 .12" align="center" color="#303840" width="1.12"></a-text>
+    <!-- Educational information cards -->
+    <a-plane position="-0.94 0.80 -0.02" width="1.08" height="0.60"
+             rotation="-90 0 0" color="#111111" opacity="0.88">
+      <a-text value="From idea to 3D model"
+              align="center" color="#4DA3FF" width="1.0"
+              position="0 0.13 0.01"></a-text>
+      <a-text value="Design and prepare a digital model for manufacturing."
+              align="center" color="#FFFFFF" width="0.92"
+              wrap-count="28" position="0 -0.06 0.01"></a-text>
+    </a-plane>
 
-<!-- 3D PRINTING -->
-<a-plane position="1.27 .66 .02" width="1.20" height=".60"
- material="shader:flat;color:#FFFFFF;opacity:1;transparent:false;side:double"></a-plane>
-<a-text value="3D PRINTING" position="1.27 .84 .12" align="center"
- color="#16202A" width="1.48"></a-text>
-<a-text value="Bambu Lab P2S" position="1.27 .69 .12" align="center"
- color="#096FD8" width="1.25"></a-text>
-<a-text value="FDM / FFF printing with PLA\ncreates a physical learning object."
- position="1.27 .50 .12" align="center" color="#303840" width="1.12"></a-text>
+    <a-plane position="0.94 0.80 -0.02" width="1.08" height="0.60"
+             rotation="-90 0 0" color="#111111" opacity="0.88">
+      <a-text value="Bambu Lab P2S"
+              align="center" color="#4DA3FF" width="1.0"
+              position="0 0.13 0.01"></a-text>
+      <a-text value="Prepare print settings in Bambu Studio and manufacture the object."
+              align="center" color="#FFFFFF" width="0.92"
+              wrap-count="28" position="0 -0.06 0.01"></a-text>
+    </a-plane>
 
-<!-- AUGMENTED REALITY -->
-<a-plane position="-1.27 -.66 .02" width="1.20" height=".60"
- material="shader:flat;color:#FFFFFF;opacity:1;transparent:false;side:double"></a-plane>
-<a-text value="AUGMENTED REALITY" position="-1.27 -.48 .12" align="center"
- color="#16202A" width="1.28"></a-text>
-<a-text value="Bringing objects to life" position="-1.27 -.63 .12" align="center"
- color="#096FD8" width="1.20"></a-text>
-<a-text value="Scan the marker to explore the\n3D object and digital information."
- position="-1.27 -.82 .12" align="center" color="#303840" width="1.10"></a-text>
+    <a-plane position="-0.94 -0.55 -0.02" width="1.08" height="0.60"
+             rotation="-90 0 0" color="#111111" opacity="0.88">
+      <a-text value="Bringing objects to life"
+              align="center" color="#4DA3FF" width="1.0"
+              position="0 0.13 0.01"></a-text>
+      <a-text value="Use AR to connect the physical 3D print with digital information."
+              align="center" color="#FFFFFF" width="0.92"
+              wrap-count="28" position="0 -0.06 0.01"></a-text>
+    </a-plane>
 
-<!-- PRACTICAL APPLICATIONS -->
-<a-plane position="1.27 -.66 .02" width="1.20" height=".60"
- material="shader:flat;color:#FFFFFF;opacity:1;transparent:false;side:double"></a-plane>
-<a-text value="PRACTICAL APPLICATIONS" position="1.27 -.48 .12" align="center"
- color="#16202A" width="1.17"></a-text>
-<a-text value="Learn - Use - Develop" position="1.27 -.63 .12" align="center"
- color="#096FD8" width="1.20"></a-text>
-<a-text value="3D printing + AR for VET,\nprototyping and technical learning."
- position="1.27 -.82 .12" align="center" color="#303840" width="1.10"></a-text>
+    <a-plane position="0.94 -0.55 -0.02" width="1.08" height="0.60"
+             rotation="-90 0 0" color="#111111" opacity="0.88">
+      <a-text value="Learn - Use - Develop"
+              align="center" color="#4DA3FF" width="1.0"
+              position="0 0.13 0.01"></a-text>
+      <a-text value="Explore the model, understand the process and develop new applications."
+              align="center" color="#FFFFFF" width="0.92"
+              wrap-count="28" position="0 -0.06 0.01"></a-text>
+    </a-plane>
 
-<!-- CONNECTORS -->
-<a-plane position="-.67 .31 .07" width=".40" height=".018" rotation="0 0 -31"
- material="shader:flat;color:#1684E8;side:double"></a-plane>
-<a-circle position="-.50 .20 .09" radius=".030" material="shader:flat;color:#1684E8;side:double"></a-circle>
+    <!-- Process -->
+    <a-plane position="0 -1.18 -0.03" width="2.65" height="0.36"
+             rotation="-90 0 0" color="#111111" opacity="0.90">
+      <a-text value="3D MODEL  >  BAMBU STUDIO  >  3D PRINTING  >  AR"
+              align="center" color="#FFFFFF" width="2.45"
+              position="0 0 0.01"></a-text>
+    </a-plane>
 
-<a-plane position=".67 .31 .07" width=".40" height=".018" rotation="0 0 31"
- material="shader:flat;color:#EF4444;side:double"></a-plane>
-<a-circle position=".50 .20 .09" radius=".030" material="shader:flat;color:#EF4444;side:double"></a-circle>
+  </a-marker>
 
-<a-plane position="-.67 -.31 .07" width=".40" height=".018" rotation="0 0 31"
- material="shader:flat;color:#22A965;side:double"></a-plane>
-<a-circle position="-.50 -.20 .09" radius=".030" material="shader:flat;color:#22A965;side:double"></a-circle>
-
-<a-plane position=".67 -.31 .07" width=".40" height=".018" rotation="0 0 -31"
- material="shader:flat;color:#F0A51A;side:double"></a-plane>
-<a-circle position=".50 -.20 .09" radius=".030" material="shader:flat;color:#F0A51A;side:double"></a-circle>
-
-<!-- FOOTER -->
-<a-plane position="0 -1.27 .02" width="2.82" height=".30"
- material="shader:flat;color:#202630;opacity:.94;transparent:true"></a-plane>
-<a-text value="3D MODEL  >  BAMBU STUDIO  >  3D PRINTING  >  AR"
- position="0 -1.27 .11" align="center" color="#FFFFFF" width="1.88"></a-text>
-
-</a-entity>
-</a-marker>
-<a-entity camera></a-entity>
+  <a-entity camera></a-entity>
 </a-scene>
 </body>
 </html>
