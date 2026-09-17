@@ -20,6 +20,32 @@ AFRAME.registerComponent('marker-ui',{
   this.el.addEventListener('markerLost',()=>g.style.display='block');
  }
 });
+
+AFRAME.registerComponent('stabilize-logo', {
+  init: function () {
+    this.el.addEventListener('model-loaded', () => {
+      const obj = this.el.getObject3D('mesh');
+      if (!obj) return;
+      obj.traverse((node) => {
+        if (!node.isMesh) return;
+        const materials = Array.isArray(node.material) ? node.material : [node.material];
+        materials.forEach((mat) => {
+          if (!mat) return;
+          const name = (mat.name || '').toLowerCase();
+          if (name.includes('red')) {
+            mat.depthTest = false;
+            mat.depthWrite = false;
+            mat.transparent = false;
+            mat.side = THREE.DoubleSide;
+            mat.needsUpdate = true;
+            node.renderOrder = 50;
+          }
+        });
+      });
+    });
+  }
+});
+
 </script>
 </head>
 <body>
@@ -37,7 +63,7 @@ AFRAME.registerComponent('marker-ui',{
 <a-entity rotation="-90 0 0">
 
 <!-- MODEL -->
-<a-entity gltf-model="#model" position="0 0 .18" scale=".72 .72 .72"></a-entity>
+<a-entity gltf-model="#model" stabilize-logo position="0 0 .18" scale=".72 .72 .72"></a-entity>
 
 <!-- HEADER -->
 <a-plane position="0 1.30 .02" width="2.82" height=".42"
@@ -55,7 +81,7 @@ AFRAME.registerComponent('marker-ui',{
 <a-text value="From idea to 3D model" position="-1.20 .69 .22" align="center"
  color="#58B2FF" width="1.75"></a-text>
 <a-text value="Create the model and prepare it\nfor printing in Bambu Studio."
- position="-1.20 .47 .22" align="center" color="#202020" width="1.72"></a-text>
+ position="-1.20 .47 .22" align="center" color="#202020" width="1.30"></a-text>
 
 <!-- 3D PRINTING -->
 <a-plane position="1.20 .66 -.08" width="1.28" height=".62"
@@ -65,7 +91,7 @@ AFRAME.registerComponent('marker-ui',{
 <a-text value="Bambu Lab P2S" position="1.20 .69 .22" align="center"
  color="#58B2FF" width="1.75"></a-text>
 <a-text value="FDM / FFF printing with PLA\ncreates a physical learning object."
- position="1.20 .47 .22" align="center" color="#202020" width="1.72"></a-text>
+ position="1.20 .47 .22" align="center" color="#202020" width="1.30"></a-text>
 
 <!-- AUGMENTED REALITY -->
 <a-plane position="-1.20 -.66 -.08" width="1.28" height=".62"
@@ -75,7 +101,7 @@ AFRAME.registerComponent('marker-ui',{
 <a-text value="Bringing objects to life" position="-1.20 -.63 .22" align="center"
  color="#58B2FF" width="1.72"></a-text>
 <a-text value="Scan the marker to explore the\n3D object and digital information."
- position="-1.20 -.84 .22" align="center" color="#202020" width="1.74"></a-text>
+ position="-1.20 -.84 .22" align="center" color="#202020" width="1.30"></a-text>
 
 <!-- PRACTICAL APPLICATIONS -->
 <a-plane position="1.20 -.66 -.08" width="1.28" height=".62"
@@ -85,7 +111,7 @@ AFRAME.registerComponent('marker-ui',{
 <a-text value="Learn - Use - Develop" position="1.20 -.63 .22" align="center"
  color="#58B2FF" width="1.72"></a-text>
 <a-text value="3D printing + AR for VET,\nprototyping and technical learning."
- position="1.20 -.84 .22" align="center" color="#202020" width="1.74"></a-text>
+ position="1.20 -.84 .22" align="center" color="#202020" width="1.30"></a-text>
 
 <!-- CONNECTORS -->
 <a-plane position="-.67 .31 -.03" width=".40" height=".018" rotation="0 0 -31"
