@@ -30,14 +30,14 @@ AFRAME.registerComponent('marker-ui',{
  arjs="trackingMethod:best;sourceType:webcam;debugUIEnabled:false">
 
 <a-assets>
-<a-asset-item id="model" src="assets/asset.glb"></a-asset-item>
+<a-asset-item id="model" src="assets/asset_fixed.glb"></a-asset-item>
 </a-assets>
 
 <a-marker type="pattern" url="assets/marker.patt" marker-ui>
 <a-entity rotation="-90 0 0">
 
 <!-- MODEL -->
-<a-entity gltf-model="#model" position="0 0 .42" scale=".72 .72 .72"></a-entity>
+<a-entity gltf-model="#model" position="0 0 .18" scale=".72 .72 .72"></a-entity>
 
 <!-- HEADER -->
 <a-plane position="0 1.30 .02" width="2.82" height=".42"
@@ -49,43 +49,43 @@ AFRAME.registerComponent('marker-ui',{
 
 <!-- DIGITAL MODEL -->
 <a-plane position="-1.20 .66 -.08" width="1.28" height=".62"
- material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:false;depthTest:false"></a-plane>
+ material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:true;depthTest:true"></a-plane>
 <a-text value="DIGITAL MODEL" position="-1.20 .84 .22" align="center"
- color="#16202A" width="2.02" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#16202A" width="2.02"></a-text>
 <a-text value="From idea to 3D model" position="-1.20 .69 .22" align="center"
- color="#58B2FF" width="1.75" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#58B2FF" width="1.75"></a-text>
 <a-text value="Create the model and prepare it\nfor printing in Bambu Studio."
- position="-1.20 .50 .22" align="center" color="#202020" width="1.70" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ position="-1.20 .47 .22" align="center" color="#202020" width="1.72"></a-text>
 
 <!-- 3D PRINTING -->
 <a-plane position="1.20 .66 -.08" width="1.28" height=".62"
- material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:false;depthTest:false"></a-plane>
+ material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:true;depthTest:true"></a-plane>
 <a-text value="3D PRINTING" position="1.20 .84 .22" align="center"
- color="#16202A" width="2.02" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#16202A" width="2.02"></a-text>
 <a-text value="Bambu Lab P2S" position="1.20 .69 .22" align="center"
- color="#58B2FF" width="1.75" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#58B2FF" width="1.75"></a-text>
 <a-text value="FDM / FFF printing with PLA\ncreates a physical learning object."
- position="1.20 .50 .22" align="center" color="#202020" width="1.70" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ position="1.20 .47 .22" align="center" color="#202020" width="1.72"></a-text>
 
 <!-- AUGMENTED REALITY -->
 <a-plane position="-1.20 -.66 -.08" width="1.28" height=".62"
- material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:false;depthTest:false"></a-plane>
+ material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:true;depthTest:true"></a-plane>
 <a-text value="AUGMENTED REALITY" position="-1.20 -.48 .22" align="center"
- color="#16202A" width="1.82" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#16202A" width="1.82"></a-text>
 <a-text value="Bringing objects to life" position="-1.20 -.63 .22" align="center"
- color="#58B2FF" width="1.72" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#58B2FF" width="1.72"></a-text>
 <a-text value="Scan the marker to explore the\n3D object and digital information."
- position="-1.20 -.82 .22" align="center" color="#202020" width="1.72" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ position="-1.20 -.84 .22" align="center" color="#202020" width="1.74"></a-text>
 
 <!-- PRACTICAL APPLICATIONS -->
 <a-plane position="1.20 -.66 -.08" width="1.28" height=".62"
- material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:false;depthTest:false"></a-plane>
+ material="shader:flat;color:#F4F7FA;opacity:1;transparent:false;side:double;depthWrite:true;depthTest:true"></a-plane>
 <a-text value="PRACTICAL APPLICATIONS" position="1.20 -.48 .22" align="center"
- color="#16202A" width="1.68" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#16202A" width="1.68"></a-text>
 <a-text value="Learn - Use - Develop" position="1.20 -.63 .22" align="center"
- color="#58B2FF" width="1.72" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ color="#58B2FF" width="1.72"></a-text>
 <a-text value="3D printing + AR for VET,\nprototyping and technical learning."
- position="1.20 -.82 .22" align="center" color="#202020" width="1.72" material="shader:flat;depthTest:false;depthWrite:false"></a-text>
+ position="1.20 -.84 .22" align="center" color="#202020" width="1.74"></a-text>
 
 <!-- CONNECTORS -->
 <a-plane position="-.67 .31 -.03" width=".40" height=".018" rotation="0 0 -31"
